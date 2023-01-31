@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/section', [SectionController::class, 'createSection']);
 
+Route::post('/section/{id}', [SectionController::class, 'getSectionTask']);//array of json
 Route::delete('/section/{id}', [SectionController::class, 'deleteSection']);
 
 Route::get('/tasks',[TaskController::class,'getTasks']);

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
@@ -14,7 +13,7 @@ class TaskController extends Controller
         //TODO TaskRepository
     }
 
-    public function addTask(TaskRequest $request):JsonResponse
+    public function addTask(TaskRequest $request): JsonResponse
     {
         $validated = $request->validated();
         $task = new Task();
@@ -22,7 +21,7 @@ class TaskController extends Controller
         $task->user_id = $validated['user_id'] ?? null;
         $task->section_id = $validated['section_id'] ?? null;
         $task->save();
-        return response()->json($task,200);
+        return response()->json($task, 200);
         //TODO TRY CATCH IN SERVICE
     }
 

@@ -21,7 +21,37 @@
 </head>
 <body>
 <div id="app">
-    <example-component></example-component>
+    <div>
+        <div class="dropdown">
+            <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Lists
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Первая секция</a></li>
+                <li><a class="dropdown-item" href="#">Первая секция</a></li>
+                <li><a class="dropdown-item" href="#">Первая секция</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div>
+        <div class="task">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" checked value="" aria-label="...">
+                    First checkbox
+                    <button style="position:absolute;left: 98%" type="button" class="btn-close" aria-label="Close"></button>
+                </li>
+                <li class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">
+                    First checkbox
+                    <button style="position:absolute;left: 98%" type="button" class="btn-close" aria-label="Close"></button>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
 </div>
 </body>
 </html>

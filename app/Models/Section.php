@@ -10,7 +10,7 @@ class Section extends Model
 {
     use HasFactory;
 
-    public function tasks()
+    public function tasks():HasMany
     {
         return $this->hasMany(Task::class);
     }
