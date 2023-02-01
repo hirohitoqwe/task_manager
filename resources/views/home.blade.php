@@ -35,6 +35,7 @@
     </div>
 
     <div>
+        <index-component></index-component>
         <div class="task">
             <ul class="list-group">
                 <li class="list-group-item">

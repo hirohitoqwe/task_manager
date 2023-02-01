@@ -27,7 +27,7 @@ class TaskController extends Controller
     public function getSectionTask(int $sectionID): JsonResponse
     {
         $section = Section::find($sectionID);
-        return response()->json($section->tasks()->get(), 200);
+        return response()->json($section->tasks()->get(), 200);//TODO TRY CATCH
     }
 
     public function getTasksByUser(int $userID): JsonResponse

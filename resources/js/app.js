@@ -1,12 +1,11 @@
 import Vue from 'vue'
 
-import ExampleComponent from "./components/ExampleComponent";
-
+import IndexComponent from "./components/IndexComponent";
 require('./bootstrap');
 
 const app = new Vue({
     el: '#app',
     components: {
-        ExampleComponent
+        IndexComponent
     }
 });

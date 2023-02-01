@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 class SectionController extends Controller
 {
 
+    public function getSection():JsonResponse
+    {
+        return response()->json(Section::all(),200);
+    }
+
     public function createSection(Request $request): JsonResponse
     {
         $section = new Section();
