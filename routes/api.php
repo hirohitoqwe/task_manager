@@ -19,11 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/section', [SectionController::class, 'createSection']);
-
-Route::post('/section/{id}', [SectionController::class, 'getSectionTask']);//array of json
-Route::delete('/section/{id}', [SectionController::class, 'deleteSection']);
+Route::prefix('/section')->group(function (){
+    Route::post('/', [SectionController::class, 'createSection']);
+    Route::delete('/{id}', [SectionController::class, 'deleteSection']);
+});
 
 Route::get('/tasks',[TaskController::class,'getTasks']);
-
+Route::post('/section/getTask/{id}', [TaskController::class, 'getSectionTask']);//array of json
 Route::post('/task',[TaskController::class,'addTask']);

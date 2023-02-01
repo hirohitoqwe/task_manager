@@ -23,10 +23,4 @@ class SectionController extends Controller
         return response()->json(['message' => 'Section was deleted'], 202);
     }
 
-    public function getSectionTask(int $sectionID): JsonResponse
-    {
-        $section = Section::find($sectionID);
-        return response()->json($section->tasks()->get(), 200);
-    }
-
 }

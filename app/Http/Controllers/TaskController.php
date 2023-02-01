@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
+use App\Models\Section;
 use App\Models\Task;
+use App\Models\User;
+use App\Repositories\TaskRepository;
 use Illuminate\Http\JsonResponse;
 
 class TaskController extends Controller
 {
-    public function getTasks()
-    {
-        //TODO TaskRepository
-    }
 
     public function addTask(TaskRequest $request): JsonResponse
     {
@@ -23,6 +22,20 @@ class TaskController extends Controller
         $task->save();
         return response()->json($task, 200);
         //TODO TRY CATCH IN SERVICE
+    }
+
+    public function getSectionTask(int $sectionID): JsonResponse
+    {
+        $section = Section::find($sectionID);
+        return response()->json($section->tasks()->get(), 200);
+    }
+
+    public function getTasksByUser(int $userID): JsonResponse
+    {
+        $repository = new TaskRepository();//TODO user service container
+        $user = User::find($userID);
+        return $repository->getUserTask($user);
+
     }
 
 }
