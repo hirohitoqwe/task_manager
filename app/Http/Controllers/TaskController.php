@@ -38,4 +38,9 @@ class TaskController extends Controller
 
     }
 
+    public function getTasks():JsonResponse
+    {
+        return response()->json(Task::all(),200);
+    }
+
 }
