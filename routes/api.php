@@ -27,5 +27,5 @@ Route::prefix('/section')->group(function (){
 });
 
 Route::get('/tasks',[TaskController::class,'getTasks']);
-
+Route::patch('/task/{id}',[TaskController::class,'']);
 Route::post('/task',[TaskController::class,'addTask']);

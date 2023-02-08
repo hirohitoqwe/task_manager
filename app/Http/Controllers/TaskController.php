@@ -38,9 +38,17 @@ class TaskController extends Controller
 
     }
 
-    public function getTasks():JsonResponse
+    public function getTasks(): JsonResponse
     {
-        return response()->json(Task::all(),200);
+        return response()->json(Task::all(), 200);
+    }
+
+    public function changeTaskStatus(int $taskID): JsonResponse
+    {
+        $task = Task::find($taskID);
+        $task->status *= false;
+        $task->save();
+        return response()->json($task,200);
     }
 
 }
