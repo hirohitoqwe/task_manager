@@ -65,7 +65,7 @@ export default {
             this.getSections();
         },
         setSelectSection(section_id) {
-            this.$refs.TaskComponent.getTasks(section_id);
+            this.$refs.TaskComponent.getTasks(section_id)
         },
         inputSection() {
             this.addSectionInput = !this.addSectionInput;
