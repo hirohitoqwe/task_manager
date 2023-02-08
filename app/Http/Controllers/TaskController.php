@@ -22,6 +22,7 @@ class TaskController extends Controller
         $task->save();
         return response()->json($task, 200);
         //TODO TRY CATCH IN SERVICE
+
     }
 
     public function getSectionTask(int $sectionID): JsonResponse
@@ -40,15 +41,15 @@ class TaskController extends Controller
 
     public function getTasks(): JsonResponse
     {
-        return response()->json(Task::all(), 200);
+        return response()->json(Task::where('section_id',null)->get(), 200);
     }
 
     public function changeTaskStatus(int $taskID): JsonResponse
     {
         $task = Task::find($taskID);
-        $task->status *= false;
+        $task->task_status = !$task->task_status;
         $task->save();
-        return response()->json($task,200);
+        return response()->json($task, 200);
     }
 
 }

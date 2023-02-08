@@ -14,6 +14,11 @@
                         <div class="collapse navbar-collapse" id="navbar" style="background:#A9A9A9;width: 80%">
                             <!-- Пункты вертикального меню -->
                             <ul class="navbar-nav">
+                                <li>
+                                    <button type="button" @click.prevent="setSelectSection()"
+                                            class="btn btn-outline-secondary">Главная
+                                    </button>
+                                </li>
                                 <li v-for="section in sections">
                                     <button type="button" @click.prevent="setSelectSection(section.id)"
                                             class="btn btn-outline-secondary">{{ section.section_name }}
