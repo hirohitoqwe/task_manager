@@ -70,7 +70,12 @@ export default {
             this.getSections();
         },
         setSelectSection(section_id) {
-            this.$refs.TaskComponent.getTasks(section_id)
+            if (section_id === undefined) {
+                this.$refs.TaskComponent.getTasks(null);
+                return;
+            }
+            this.$refs.TaskComponent.getTasks(section_id);
+            console.log(`SELECT SECTION ${section_id}`);
         },
         inputSection() {
             this.addSectionInput = !this.addSectionInput;

@@ -38,10 +38,10 @@ export default {//TODO TEST BUTTON
                 }).catch(response => {
                     console.log(response)
                 });
-                this.newTask.section_id = section_id;
             } else {
                 this.getAllTasks();
             }
+            this.newTask.section_id = section_id;
         },
         getAllTasks() {
             axios.get('api/tasks').then(response => {
@@ -54,6 +54,7 @@ export default {//TODO TEST BUTTON
                 console.log(response)
             });
             this.getTasks(this.newTask.section_id);
+            console.log(this.newTask.section_id);
         },
         addTask() {
             axios.post('api/task', this.newTask);
