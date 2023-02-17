@@ -1,23 +1,18 @@
 <template>
-    <ul>
-        <li v-for="task in tasks" class="task">
-            <p>
-                <button @click.prevent="changeTaskStatus(task.id)"><i
-                    :class=" task.task_status ? 'bi bi-check' : 'bi bi-check2-all'"></i></button>
-                {{ task.task_name }}
-            </p>
-        </li>
-        <i class="bi bi-plus-lg" @click.prevent="addInputTask">Добавить</i>
-        <div :class=" this.inputTask ? '' : 'd-none' ">
-            <input type="text" v-model="newTask.task_name" required>
-            <button type="submit" @click.prevent="addTask">Добавить</button>
+    <div class="tasks" >
+        <h2>Tasks</h2>
+        <div class="task" v-for="task in tasks">
+            <input type="checkbox">
+            <span class="checkmark">{{ task.task_name }}</span>
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-    </ul>
-
+    </div>
 </template>
 
 <script>
-export default {//TODO TEST BUTTON
+export default {
     name: "TaskComponent",
     data() {
         return {
@@ -72,7 +67,19 @@ export default {//TODO TEST BUTTON
 </script>
 
 <style scoped>
-.task {
-    font-size: 20px;
+.tasks {
+    margin-top: 10px;
+    float:left;
+    width:300px;
+    margin-left: 10px;
+}
+
+.task{
+    margin: 3px;
+    font-size: 22px;
+    padding: 5px;
+}
+.close{
+    float: right;
 }
 </style>

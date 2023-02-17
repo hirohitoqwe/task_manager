@@ -1,44 +1,15 @@
 <template>
-    <div class="col-md-6">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3 col-lg-3 navbar-container bg-light">
-                    <!-- Вертикальное меню -->
-                    <nav class="navbar navbar-expand-md navbar-light">
-                        <p class="navbar-brand">Sections</p>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
-                                aria-controls="navbarSupportedContent" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbar" style="background:#A9A9A9;width: 80%">
-                            <!-- Пункты вертикального меню -->
-                            <ul class="navbar-nav">
-                                <li>
-                                    <button type="button" @click.prevent="setSelectSection()"
-                                            class="btn btn-outline-secondary">Главная
-                                    </button>
-                                </li>
-                                <li v-for="section in sections">
-                                    <button type="button" @click.prevent="setSelectSection(section.id)"
-                                            class="btn btn-outline-secondary">{{ section.section_name }}
-                                    </button>
-                                </li>
-                            </ul>
-
-                        </div>
-                        <i class="bi bi-plus-lg" @click.prevent="inputSection"></i>
-                        <div :class=" this.addSectionInput ? '' : 'd-none' ">
-                            <input type="text" v-model="newSection.section_name" required>
-                            <button type="submit" @click.prevent="addSection">Добавить</button>
-                        </div>
-                    </nav>
-                </div>
-                <div class="col-md-8 col-lg-9 content-container">
-                    <task-component ref="TaskComponent"></task-component>
-                </div>
+    <div>
+        <div class="sections">
+            <h2>Sections</h2>
+            <div class="section" v-for="section in sections" @click.prevent="setSelectSection(section.id)">
+                {{section.section_name}}
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </div>
+        <task-component ref="TaskComponent"></task-component>
     </div>
 </template>
 
@@ -70,6 +41,7 @@ export default {
             this.getSections();
         },
         setSelectSection(section_id) {
+            console.log('click');
             if (section_id === undefined) {
                 this.$refs.TaskComponent.getTasks(null);
                 return;
@@ -92,44 +64,22 @@ export default {
 </script>
 
 <style scoped>
-@media (min-width: 768px) {
-
-    .btn {
-        display: block;
-        width: 100%;
-        border: none;
-        padding: 14px 28px;
-        font-size: 16px;
-        cursor: pointer;
-        text-align: center;
-    }
-
-    .navbar-container {
-        position: sticky;
-        top: 0;
-        overflow-y: auto;
-        height: 100vh;
-    }
-
-    .navbar-container .navbar {
-        align-items: flex-start;
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-        flex-direction: column;
-        height: 100%;
-    }
-
-    .navbar-container .navbar-collapse {
-        align-items: flex-start;
-    }
-
-    .navbar-container .nav {
-        flex-direction: column;
-        flex-wrap: nowrap;
-    }
-
-    .navbar-container .navbar-nav {
-        flex-direction: column !important;
-    }
+.sections {
+    margin-top: 10px;
+    width:300px;
+    float:left;
+    box-shadow: inset -1px 0 0 gray;
 }
+
+.section{
+    width: 300px;
+    margin: 3px;
+    font-size: 22px;
+    padding: 5px;
+}
+
+.close{
+    float: right;
+}
+
 </style>
