@@ -19,6 +19,7 @@ class TaskController extends Controller
         $task->task_name = $validated['task_name'];
         $task->user_id = $validated['user_id'] ?? null;
         $task->section_id = $validated['section_id'] ?? null;
+        $task->task_status= true;
         $task->save();
         return response()->json($task, 200);
         //TODO TRY CATCH IN SERVICE

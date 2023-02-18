@@ -21,7 +21,7 @@
 <script>
 import TaskComponent from "./TaskComponent";
 
-export default {//TODO test of error span class
+export default {
     name: "SectionComponent",
     components: {TaskComponent},
     data() {
@@ -38,16 +38,19 @@ export default {//TODO test of error span class
         getSections() {
             axios.get('api/section/').then(response => {
                 this.sections = response.data;
-                console.log(response);
             })
         },
         addSection() {
-            axios.post('api/section/create', this.newSection).then(response => console.log(response));
+            axios.post('api/section/create', this.newSection).then(response => {
+                console.log(response)
+                this.sections.push({
+                    section_id: response.data.id,
+                    section_name: response.data.section_name
+                });
+            });
             this.newSection = {section_name: null};
-            this.getSections();
         },
         setSelectSection(section_id) {
-            console.log('click');
             if (section_id === undefined) {
                 this.$refs.TaskComponent.getTasks(null);
                 this.section_id = null;
@@ -62,6 +65,8 @@ export default {//TODO test of error span class
             this.addSectionInput = !this.addSectionInput;
         },
         sectionDelete(section_id) {
+            console.log("Вот секции ", this.sections);
+            this.sections = this.sections.filter(elem => elem.id !== section_id);
             axios.delete(`api/section/${section_id}`).then(response => {
                 console.log(response)
             });
@@ -87,6 +92,7 @@ export default {//TODO test of error span class
 }
 
 .section {
+    cursor:pointer;
     width: 300px;
     margin: 3px;
     font-size: 22px;
@@ -108,8 +114,8 @@ i {
     margin-left: 5px;
 }
 
-.input-field {
-
+h2{
+    cursor:pointer;
 }
 
 </style>
