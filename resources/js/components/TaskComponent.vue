@@ -1,13 +1,14 @@
 <template>
-    <div class="tasks" >
+    <div class="tasks">
         <h2>Tasks</h2>
         <div class="task" v-for="task in tasks">
             <input type="checkbox">
             <span class="checkmark">{{ task.task_name }}</span>
-            <button type="button" class="close" aria-label="Close">
+            <button type="button" class="close" @click.prevent="" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <button><i class="bi bi-plus-circle"></i></button>
     </div>
 </template>
 
@@ -58,6 +59,11 @@ export default {
         },
         addInputTask() {
             this.inputTask = !this.inputTask;
+        },
+        deleteTask(task_id) {
+            axios.delete(`api/task/${task_id}`).then(response => {
+                console.log(response)
+            });
         }
     },
     mounted() {
@@ -69,17 +75,28 @@ export default {
 <style scoped>
 .tasks {
     margin-top: 10px;
-    float:left;
-    width:300px;
+    float: left;
+    width: 300px;
     margin-left: 10px;
 }
 
-.task{
+.task {
     margin: 3px;
     font-size: 22px;
     padding: 5px;
 }
-.close{
+
+.close {
     float: right;
 }
+
+button {
+    border: 0;
+    background: transparent;
+}
+
+i {
+    font-size: 20px;
+}
+
 </style>

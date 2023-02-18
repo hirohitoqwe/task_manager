@@ -4,10 +4,11 @@
             <h2>Sections</h2>
             <div class="section" v-for="section in sections" @click.prevent="setSelectSection(section.id)">
                 {{section.section_name}}
-                <button type="button" class="close" aria-label="Close">
+                <button type="button" class="close" aria-label="Close" >
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <button><i class="bi bi-plus-circle"></i></button>
         </div>
         <task-component ref="TaskComponent"></task-component>
     </div>
@@ -67,8 +68,9 @@ export default {
 .sections {
     margin-top: 10px;
     width:300px;
+    height: 100vh;
     float:left;
-    box-shadow: inset -1px 0 0 gray;
+    box-shadow: inset -2px 0 0 gray;
 }
 
 .section{
@@ -80,6 +82,15 @@ export default {
 
 .close{
     float: right;
+    margin-right: 5px;
 }
 
+button
+{
+    border: 0;
+    background: transparent;
+}
+i {
+    font-size: 20px;
+}
 </style>

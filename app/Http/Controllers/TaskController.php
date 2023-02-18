@@ -41,7 +41,7 @@ class TaskController extends Controller
 
     public function getTasks(): JsonResponse
     {
-        return response()->json(Task::where('section_id',null)->get(), 200);
+        return response()->json(Task::where('section_id', null)->get(), 200);
     }
 
     public function changeTaskStatus(int $taskID): JsonResponse
@@ -51,5 +51,12 @@ class TaskController extends Controller
         $task->save();
         return response()->json($task, 200);
     }
+
+    public function deleteTask(int $taskId): JsonResponse
+    {
+        Task::destroy($taskId);
+        return response()->json(['status'=>'ok'],202);
+    }
+
 
 }
