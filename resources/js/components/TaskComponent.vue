@@ -10,8 +10,8 @@
             </button>
         </div>
         <button @click.prevent="addInputTask"><i class="bi bi-plus-circle"></i></button>
-        <div class="input-group" :class="inputTask ? '' : 'd-none'">
-            <input type="text" class="input-field" v-model="newTask.task_name">
+        <div class="input-gr" :class="inputTask ? '' : 'd-none'">
+            <input type="text" class="input" v-model="newTask.task_name">
             <button @click.prevent="addTask"><i class="bi bi-check2"></i></button>
         </div>
     </div>
@@ -63,7 +63,7 @@ export default {
             });
         },
         addTask() {
-            axios.post('api/task', this.newTask).then(response => {
+            axios.post('api/task', this.newTask).then(response => {//TODO added in promise its normal ?
                 console.log(response.data);
                 this.tasks.push({
                     id: response.data.id,
@@ -121,6 +121,13 @@ i {
     transform:scale(1.3);
     opacity:0.9;
     cursor:pointer;
+}
+
+.input{
+    border: 1px solid black;
+    margin-right: 5px;
+    border-radius: 10px;
+    height: 35px;
 }
 
 

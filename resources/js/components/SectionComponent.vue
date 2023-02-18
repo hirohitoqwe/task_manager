@@ -9,8 +9,8 @@
                 </button>
             </div>
             <button @click.prevent="inputSection"><i class="bi bi-plus-circle"></i></button>
-            <div class="input-group" :class="this.addSectionInput ? '' : 'd-none'">
-                <input type="text" class="input-field" v-model="newSection.section_name">
+            <div class="input-gr" :class="addSectionInput ? '' : 'd-none'">
+                <input type="text" class="input" v-model="newSection.section_name">
                 <button @click.prevent="addSection"><i class="bi bi-check2"></i></button>
             </div>
         </div>
@@ -116,6 +116,13 @@ i {
 
 h2{
     cursor:pointer;
+}
+
+.input{
+    border: 1px solid black;
+    margin-right: 5px;
+    border-radius: 10px;
+    height: 35px;
 }
 
 </style>
