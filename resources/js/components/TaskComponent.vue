@@ -4,7 +4,7 @@
         <div class="task" v-for="task in tasks">
             <input type="checkbox">
             <span class="checkmark">{{ task.task_name }}</span>
-            <button type="button" class="close" @click.prevent="" aria-label="Close">
+            <button type="button" class="close" @click.prevent="deleteTask(task.id)" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -22,7 +22,8 @@ export default {
             newTask: {
                 task_name: null,
                 section_id: null,
-                user_id: null
+                task_status:false,
+                user_id: null,
             }
         }
     },
@@ -64,6 +65,7 @@ export default {
             axios.delete(`api/task/${task_id}`).then(response => {
                 console.log(response)
             });
+            this.getTasks(this.$parent.section_id);
         }
     },
     mounted() {

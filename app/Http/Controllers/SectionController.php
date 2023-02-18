@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Section;
+use App\Models\Task;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -24,8 +25,9 @@ class SectionController extends Controller
 
     public function deleteSection(int $id): JsonResponse
     {
+        Task::where('section_id','=',$id)->delete();
         Section::destroy($id);
-        return response()->json(['message' => 'Section was deleted'], 202);
+        return response()->json(['message' => 'Section and tasks of this section was deleted'], 202);
     }
 
 }
