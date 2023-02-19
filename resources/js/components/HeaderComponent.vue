@@ -3,6 +3,7 @@
         <header>
             <img height="49px"
                  src="https://sun9-69.userapi.com/impg/PB493qAec2U79Z4QjoVel0KqjeHsLMj-W-5WcQ/OVfAy0wW4Rs.jpg?size=547x193&quality=96&sign=5b118493a9580960e3ebb2e53c5ba4c6&type=album">
+            <button class="profile"><i class="bi bi-person-fill"></i></button>
         </header>
         <section-component></section-component>
     </div>
@@ -21,7 +22,20 @@ export default {
 
 header {
     height: 50px;
-    background-color: #b23636;
+    background-color: #CCCFEA;
     margin-bottom: 10px;
 }
+
+.profile{
+    border: 0;
+    background: transparent;
+    position: absolute;
+    right: 0;
+}
+
+.bi{
+    font-size: 30px;
+    color: #0a58ca;
+}
+
 </style>

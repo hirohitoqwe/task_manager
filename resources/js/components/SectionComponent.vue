@@ -92,7 +92,7 @@ export default {
 }
 
 .section {
-    cursor:pointer;
+    cursor: pointer;
     width: 300px;
     margin: 3px;
     font-size: 22px;
@@ -114,11 +114,11 @@ i {
     margin-left: 5px;
 }
 
-h2{
-    cursor:pointer;
+h2 {
+    cursor: pointer;
 }
 
-.input{
+.input {
     border: 1px solid black;
     margin-right: 5px;
     border-radius: 10px;
