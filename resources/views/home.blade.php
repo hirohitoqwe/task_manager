@@ -21,9 +21,7 @@
 </head>
 <body style="height:100vh">
     <div id="app">
-        <div>
-            <index-component></index-component>
-        </div>
+        <index-component></index-component>
     </div>
 </body>
 </html>

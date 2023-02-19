@@ -1,6 +1,10 @@
 <template>
-    <div class="form-group">
-        <header-component></header-component>
+    <div>
+        <router-link :to="{name: 'get.index'}">Get</router-link>
+        <router-link :to="{name: 'user.login'}">Login</router-link>
+        <router-link :to="{name: 'user.registration'}">Registration</router-link>
+        <router-view></router-view>
+        <!---<header-component></header-component>--->
     </div>
 </template>
 
