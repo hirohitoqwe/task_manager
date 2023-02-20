@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <input type="email" v-model="name" placeholder="name" class="form-control">
-        <input type="email" v-model="email" placeholder="email" class="form-control">
-        <input type="password" v-model="password" placeholder="password" class="form-control">
-        <input type="password" v-model="password_confirmation" placeholder="password" class="form-control">
-        <input type="submit" @click.prevent="registr" value="login" class="form-control">
+    <div class="row w-25 m-5 mx-auto">
+        <input type="email" v-model="name" placeholder="Name" class="form-control m-2">
+        <input type="email" v-model="email" placeholder="Email" class="form-control m-2">
+        <input type="password" v-model="password" placeholder="Password" class="form-control m-2">
+        <input type="password" v-model="password_confirmation" placeholder="Confirm password" class="form-control m-2">
+        <input type="submit" @click.prevent="registr" value="Registration" class="form-control m-2">
     </div>
 </template>
 
@@ -38,5 +38,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

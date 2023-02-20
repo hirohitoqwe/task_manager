@@ -1,10 +1,14 @@
 <template>
     <div>
-        <router-link :to="{name: 'get.index'}">Get</router-link>
-        <router-link :to="{name: 'user.login'}">Login</router-link>
-        <router-link :to="{name: 'user.registration'}">Registration</router-link>
-        <router-view></router-view>
-        <!---<header-component></header-component>--->
+        <div class="use" v-if="access">
+            <header-component></header-component>
+        </div>
+        <div class="login " v-if="!access">
+            <router-link :to="{name: 'get.index'}"><button>Get</button></router-link>
+            <router-link :to="{name: 'user.login'}"><button>Login</button></router-link>
+            <router-link :to="{name: 'user.registration'}"><button>Registration</button></router-link>
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
@@ -16,12 +20,28 @@ import HeaderComponent from "./HeaderComponent";
 export default {
     name: "IndexComponent",
     components: {HeaderComponent, TaskComponent, SectionComponent},
+    data() {
+        return {
+            access: false
+        }
+    },
     mounted() {
-        console.log();
+        console.log("Index component is started");
+    },
+    methods: {
+        logout() {
+            axios.post('/logout').then(response => {
+                console.log(response);
+            })
+        }
     }
 }
 </script>
 
 <style scoped>
-
+button{
+    border: 0;
+    width: 90px;
+    height: 40px;
+}
 </style>

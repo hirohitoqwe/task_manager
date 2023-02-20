@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <input type="email" v-model="email" placeholder="email" class="form-control">
-        <input type="password" v-model="password" placeholder="password" class="form-control">
-        <input type="submit" @click.prevent="login" value="login" class="form-control">
+    <div class="row w-25 p-5 mx-auto">
+        <input type="email" v-model="email" placeholder="email" class="form-control m-2">
+        <input type="password" v-model="password" placeholder="password" class="form-control m-2">
+        <input type="submit" @click.prevent="login" value="login" class="form-control  m-2">
     </div>
 </template>
 
