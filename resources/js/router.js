@@ -7,10 +7,6 @@ const router = new VueRouter({
     mode: "history",
     routes: [
         {
-            path: '/get', component: () => import("./components/AuthComponents/Get"),
-            name: 'get.index'
-        },
-        {
             path: '/profile', component: () => import("./components/HeaderComponent"),
             name: 'profile.index'
         },
@@ -38,7 +34,7 @@ router.beforeEach((to, from, next) => {
     }
 
     if (to.name === 'user.login' || to.name === 'user.registration' && token) {
-        return next({name: 'get.index'});
+        return next({name: 'profile.index'});
     }
 
     next();

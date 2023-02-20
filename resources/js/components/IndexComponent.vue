@@ -1,17 +1,14 @@
 <template>
     <div>
-        <div class="login">
-            <router-link :to="{name: 'get.index'}">
-                <button>Get</button>
-            </router-link>
+        <div class="login" v-if="!token">
             <router-link :to="{name: 'user.login'}">
                 <button>Login</button>
             </router-link>
             <router-link :to="{name: 'user.registration'}">
                 <button>Registration</button>
             </router-link>
-            <router-view></router-view>
         </div>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -23,7 +20,18 @@ import HeaderComponent from "./HeaderComponent";
 export default {
     name: "IndexComponent",
     components: {HeaderComponent, TaskComponent, SectionComponent},
+    data() {
+        return {
+            token: null
+        }
+    },
+    methods: {
+        getToken() {
+            this.token = localStorage.getItem('x_xsrf_token');
+        }
+    },
     mounted() {
+        this.getToken();
         console.log("Index component is started");
     }
 }
