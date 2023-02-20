@@ -20,8 +20,10 @@ export default {
     methods: {
         login() {
             axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post('/login', {email: this.email, password: this.password}).then(reponse => {
-                    console.log(response);
+                axios.post('/login', {email: this.email, password: this.password}).then(response => {
+                    console.log(response, response.config.headers['X-XSRF-TOKEN']);
+                    localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN']);
+                    this.$router.push({name: 'profile.index'});
                 });
             });
 
