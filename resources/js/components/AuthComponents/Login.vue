@@ -23,6 +23,7 @@ export default {
                 axios.post('/login', {email: this.email, password: this.password}).then(response => {
                     console.log(response, response.config.headers['X-XSRF-TOKEN']);
                     localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN']);
+                    this.$parent.token = localStorage.getItem('x_xsrf_token');
                     this.$router.push({name: 'profile.index'});
                 });
             });

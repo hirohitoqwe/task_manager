@@ -16,15 +16,16 @@ export default {
     name: "HeaderComponent",
     components: {SectionComponent},
     methods: {
-        logout() {
+        async logout() {
             axios.post('/logout').then(response => {
                 localStorage.removeItem('x_xsrf_token');
-                console.log(response);
+                this.$parent.token = null;
+                console.log('LOGOUT ', localStorage.getItem('s_xsrf_token'));
                 this.$router.push('user.login');
             })
         }
-    }
 
+    }
 }
 </script>
 

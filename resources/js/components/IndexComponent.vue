@@ -32,6 +32,10 @@ export default {
     },
     mounted() {
         this.getToken();
+        if (this.token) {
+            console.log(this.token);
+            this.$router.push({name: 'profile.index'});
+        }
         console.log("Index component is started");
     }
 }
