@@ -9,7 +9,8 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <button class="addTaskButton" @click.prevent="addInputTask"><i class="bi bi-plus-circle">Добавить задание</i></button>
+        <button class="addTaskButton" @click.prevent="addInputTask"><i class="bi bi-plus-circle">Добавить задание</i>
+        </button>
         <div class="input-gr" :class="inputTask ? '' : 'd-none'">
             <input type="text" class="input" v-model="newTask.task_name">
             <button @click.prevent="addTask"><i class="bi bi-check2"></i></button>
@@ -33,6 +34,13 @@ export default {
         }
     },
     methods: {
+        getUserId() {
+            axios.get('/api/user/id').then(r => {
+                console.log(r);
+                this.newTask.user_id = r.data;
+                console.log(this.user_id);
+            });
+        },
         getTasks(section_id) {
             if (section_id != null) {
                 axios.post(`api/section/getTask/${section_id}`).then(response => {
@@ -64,10 +72,12 @@ export default {
         },
         addTask() {
             axios.post('api/task', this.newTask).then(response => {
+                console.log('TASKA TASKS ', response);
                 this.tasks.push({
                     id: response.data.id,
                     task_name: response.data.task_name,
                     task_status: response.data.task_status,
+                    user_id: response.data.user_id
                 });
                 console.log(response.data);
                 this.newTask.task_name = null;
@@ -85,7 +95,7 @@ export default {
         }
     },
     mounted() {
-
+        this.getUserId();
     }
 }
 </script>

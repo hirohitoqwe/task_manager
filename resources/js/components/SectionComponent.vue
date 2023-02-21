@@ -29,12 +29,20 @@ export default {
             sections: null,
             section_id: null,
             newSection: {
-                section_name: null
+                section_name: null,
+                user_id: null
             },
             addSectionInput: false
         }
     },
     methods: {
+        getUserId() {
+            axios.get('/api/user/id').then(r => {
+                console.log(r);
+                this.newSection.user_id = r.data;
+                console.log(this.user_id);
+            });
+        },
         getSections() {
             axios.get('api/section/').then(response => {
                 this.sections = response.data;
@@ -44,9 +52,10 @@ export default {
             axios.post('api/section/create', this.newSection).then(response => {
                 console.log(response)
                 this.sections.push({
-                    section_id: response.data.id,
+                    id: response.data.id,
                     section_name: response.data.section_name
                 });
+                console.log(this.sections);
             });
             this.newSection = {section_name: null};
         },
@@ -77,6 +86,7 @@ export default {
     mounted() {
         this.getSections();
         this.$refs.TaskComponent.getAllTasks();
+        this.getUserId();
     }
 
 }

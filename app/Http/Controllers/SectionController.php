@@ -19,6 +19,7 @@ class SectionController extends Controller
     {
         $section = new Section();
         $section->section_name = $request->section_name;
+        $section->user_id = $request->user_id ?? null;
         $section->save();
         return response()->json($section, 201);
     }

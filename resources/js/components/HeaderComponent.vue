@@ -15,8 +15,13 @@ import SectionComponent from "./SectionComponent";
 export default {
     name: "HeaderComponent",
     components: {SectionComponent},
+    data() {
+        return {
+            id: null
+        }
+    },
     methods: {
-        async logout() {
+        logout() {
             axios.post('/logout').then(response => {
                 localStorage.removeItem('x_xsrf_token');
                 this.$parent.token = null;
@@ -25,6 +30,8 @@ export default {
             })
         }
 
+    },
+    mounted() {
     }
 }
 </script>
