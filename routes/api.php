@@ -18,14 +18,14 @@ use \App\Http\Controllers\UserController;
 */
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/tasks', [TaskController::class, 'getTasks']);
     Route::prefix('/section')->group(function () {
-        Route::get('/', [SectionController::class, 'getSection']);//TODO rebuilding for user
+        Route::get('/{userId}', [SectionController::class, 'getSectionByUser']);
         Route::post('/create', [SectionController::class, 'createSection']);
         Route::delete('/{id}', [SectionController::class, 'deleteSection']);
         Route::post('/getTask/{id}', [TaskController::class, 'getSectionTask']);//array of json
     });
-
+    Route::get('/nullTask/{userId}', [TaskController::class, 'getTasks']);
+    Route::get('/tasks/{userId}', [TaskController::class, 'getTasksByUser']);
     Route::patch('/task/{id}', [TaskController::class, 'changeTaskStatus']);
     Route::post('/task', [TaskController::class, 'addTask']);
     Route::delete('/task/{id}', [TaskController::class, 'deleteTask']);

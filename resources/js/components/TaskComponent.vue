@@ -34,8 +34,8 @@ export default {
         }
     },
     methods: {
-        getUserId() {
-            axios.get('/api/user/id').then(r => {
+        async getUserId() {
+            await axios.get('/api/user/id').then(r => {
                 console.log(r);
                 this.newTask.user_id = r.data;
                 console.log(this.user_id);
@@ -54,7 +54,8 @@ export default {
             this.newTask.section_id = section_id;
         },
         getAllTasks() {
-            axios.get('api/tasks').then(response => {
+            axios.get(`api/nullTask/${this.newTask.user_id}`).then(response => {
+                console.log('null task ', response);
                 this.tasks = response.data;
             });
         },
@@ -71,6 +72,7 @@ export default {
             });
         },
         addTask() {
+            console.log('Add task ?? ');
             axios.post('api/task', this.newTask).then(response => {
                 console.log('TASKA TASKS ', response);
                 this.tasks.push({
@@ -79,7 +81,7 @@ export default {
                     task_status: response.data.task_status,
                     user_id: response.data.user_id
                 });
-                console.log(response.data);
+                console.log('tasks ', this.tasks);
                 this.newTask.task_name = null;
             });
 
@@ -94,8 +96,8 @@ export default {
             });
         }
     },
-    mounted() {
-        this.getUserId();
+    async mounted() {
+        await this.getUserId();
     }
 }
 </script>

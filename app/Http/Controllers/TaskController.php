@@ -19,7 +19,7 @@ class TaskController extends Controller
         $task->task_name = $validated['task_name'];
         $task->user_id = $validated['user_id'] ?? null;
         $task->section_id = $validated['section_id'] ?? null;
-        $task->task_status= true;
+        $task->task_status = true;
         $task->save();
         return response()->json($task, 200);
         //TODO TRY CATCH IN SERVICE
@@ -34,15 +34,13 @@ class TaskController extends Controller
 
     public function getTasksByUser(int $userID): JsonResponse
     {
-        $repository = new TaskRepository();//TODO user service container
-        $user = User::find($userID);
-        return $repository->getUserTask($user);
-
+        $tasks = Task::where('user_id', $userID)->get();
+        return response()->json($tasks, 200);
     }
 
-    public function getTasks(): JsonResponse
+    public function getTasks(int $userId): JsonResponse
     {
-        return response()->json(Task::where('section_id', null)->get(), 200);
+        return response()->json(Task::where('section_id', null)->where('user_id', $userId)->get(), 200);
     }
 
     public function changeTaskStatus(int $taskID): JsonResponse
@@ -56,7 +54,7 @@ class TaskController extends Controller
     public function deleteTask(int $taskId): JsonResponse
     {
         Task::destroy($taskId);
-        return response()->json(['status'=>'ok'],202);
+        return response()->json(['status' => 'ok'], 202);
     }
 
 

@@ -10,9 +10,15 @@ use Illuminate\Http\Request;
 class SectionController extends Controller
 {
 
-    public function getSection():JsonResponse
+    public function getSection(): JsonResponse
     {
-        return response()->json(Section::all(),200);
+        return response()->json(Section::all(), 200);
+    }
+
+    public function getSectionByUser(int $userId): JsonResponse // maybe replace int to user
+    {
+        $sections = Section::where('user_id', $userId)->get();
+        return response()->json($sections, 200);
     }
 
     public function createSection(Request $request): JsonResponse
@@ -26,7 +32,7 @@ class SectionController extends Controller
 
     public function deleteSection(int $id): JsonResponse
     {
-        Task::where('section_id','=',$id)->delete();
+        Task::where('section_id', '=', $id)->delete();
         Section::destroy($id);
         return response()->json(['message' => 'Section and tasks of this section was deleted'], 202);
     }

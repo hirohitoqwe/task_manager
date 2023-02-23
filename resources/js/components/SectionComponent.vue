@@ -36,15 +36,16 @@ export default {
         }
     },
     methods: {
-        getUserId() {
-            axios.get('/api/user/id').then(r => {
+        async getUserId() {
+            await axios.get('/api/user/id').then(r => {
                 console.log(r);
                 this.newSection.user_id = r.data;
                 console.log(this.user_id);
             });
         },
         getSections() {
-            axios.get('api/section/').then(response => {
+            axios.get(`api/section/${this.newSection.user_id}`).then(response => {
+                console.log('user id', response);
                 this.sections = response.data;
             })
         },
@@ -83,10 +84,10 @@ export default {
 
     },
 
-    mounted() {
+    async mounted() {
+        await this.getUserId();
         this.getSections();
         this.$refs.TaskComponent.getAllTasks();
-        this.getUserId();
     }
 
 }
