@@ -16,8 +16,11 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-window.axios.interceptors.response.use({}, err => {
-    if (err.status === 401 || err.status === 419) {
+window.axios.interceptors.response.use(function (response) {
+    return response;
+}, function (error) {
+    console.log('EROR IN BOOTSTRAP ');
+    if (error.response.status === 401 || error.response.status === 419) {
         const token = localStorage.getItem('x_xsrf_token');
 
         if (token) {
