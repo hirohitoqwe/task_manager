@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TaskRequest;
 use App\Models\Section;
 use App\Models\Task;
-use App\Models\User;
-use App\Repositories\TaskRepository;
 use Illuminate\Http\JsonResponse;
 
 class TaskController extends Controller

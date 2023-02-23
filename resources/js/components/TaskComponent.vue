@@ -4,7 +4,8 @@
         <div class="task" v-for="task in tasks">
             <input type="checkbox" class="check" :checked="task.task_status ? '' : 'checked'"
                    @click.prevent="changeTaskStatus(task.id)">
-            <span class="checkmark">{{ task.task_name }}</span>
+            <span class="checkmark" v-if="!task.task_status"><s> {{ task.task_name }}</s></span>
+            <span class="checkmark" v-else>{{ task.task_name }}</span>
             <button type="button" class="close" @click.prevent="deleteTask(task.id)" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
