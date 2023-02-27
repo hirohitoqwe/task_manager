@@ -4,6 +4,8 @@ import IndexComponent from "./components/IndexComponent";
 
 import router from "./router";
 
+import store from "./vuex"
+
 require('./bootstrap');
 
 const app = new Vue({
@@ -11,5 +13,6 @@ const app = new Vue({
     components: {
         IndexComponent
     },
+    store: store,
     router
 });

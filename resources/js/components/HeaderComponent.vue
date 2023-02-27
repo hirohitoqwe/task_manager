@@ -26,7 +26,7 @@ export default {
                 localStorage.removeItem('x_xsrf_token');
                 this.$parent.token = null;
                 console.log('LOGOUT ', localStorage.getItem('s_xsrf_token'));
-                this.$router.push('user.login');
+                this.$router.push({name: 'user.login'});
             })
         }
 
