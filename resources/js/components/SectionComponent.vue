@@ -86,8 +86,9 @@ export default {
 
     async mounted() {
         await this.getUserId();
+        this.$refs.TaskComponent.$store.state.newTask.user_id = this.newSection.user_id;
         this.getSections();
-        this.$refs.TaskComponent.getAllTasks();
+        await this.$refs.TaskComponent.$store.dispatch('getTasks');
     }
 
 }
