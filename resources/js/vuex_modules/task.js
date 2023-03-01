@@ -1,31 +1,31 @@
 export default {
     actions: {
-        async getTasks(ctx, section_id) {
+        async getTasks(context, section_id) {
             if (section_id != null) {
                 await axios.post(`api/section/getTask/${section_id}`).then(response => {
-                    ctx.commit('updateTasks', response.data);
+                    context.commit('updateTasks', response.data);
                 }).catch(response => {
                     console.log(response)
                 });
             } else {
                 await axios.get(`api/nullTask/${this.newTask.user_id}`).then(response => {
                     console.log('null task ', response);
-                    ctx.commit('updateTasks', response.data);
+                    context.commit('updateTasks', response.data);
                 });
             }
-            ctx.commit('changeNewTaskSectionId', section_id);
+            context.commit('changeNewTaskSectionId', section_id);
         },
-        async deleteTask(ctx, task_id) {
-            ctx.commit('deleteTask', task_id);
+        async deleteTask(context, task_id) {
+            context.commit('deleteTask', task_id);
             axios.delete(`api/task/${task_id}`).then(response => {
                 console.log(response)
             });
         },
-        async addTask(ctx) {
+        async addTask(context) {
             console.log('Add task ?? ');
             await axios.post('api/task', this.newTask).then(response => {
                 console.log('TASKA TASKS ', response);
-                ctx.commit('addTask', {
+                context.commit('addTask', {
                     id: response.data.id,
                     task_name: response.data.task_name,
                     task_status: response.data.task_status,
@@ -36,15 +36,15 @@ export default {
             });
 
         },
-        async changeTaskStatus(ctx, task_id) {
+        async changeTaskStatus(context, task_id) {
             await axios.patch(`api/task/${task_id}`).then(response => {
-                ctx.commit('changeTaskStatusStatus', task_id);
+                context.commit('changeTaskStatusStatus', task_id);
             });
         },
-        async getUserId(ctx) {
+        async getUserId(context) {
             await axios.get('/api/user/id').then(r => {
                 console.log(r);
-                ctx.commit('changeUserId', r.data);
+                context.commit('changeUserId', r.data);
                 console.log(this.user_id);
             });
         },
