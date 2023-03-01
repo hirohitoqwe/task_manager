@@ -8,10 +8,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <button @click.prevent="this.inputSection"><i class="bi bi-plus-circle"></i></button>
+            <button @click.prevent="inputSection"><i class="bi bi-plus-circle"></i></button>
             <div class="input-gr" :class="addSectionInput ? '' : 'd-none'">
-                <input type="text" class="input" v-model="newSection.section_name">//TROUBLE
-                <button @click.prevent="this.addSection"><i class="bi bi-check2"></i></button>
+                <input type="text" class="input" v-model="newSection.section_name">
+                <button @click.prevent="addSection"><i class="bi bi-check2"></i></button>
             </div>
         </div>
         <task-component ref="TaskComponent"></task-component>
@@ -31,7 +31,6 @@ export default {
         },
         newSection: {
             get() {
-                console.log("NEW SECTION", this.$store.state.newSection);
                 return this.$store.getters.getterNewSection;
             },
             set(value) {
@@ -40,19 +39,12 @@ export default {
         },
         addSectionInput: {
             get() {
-                return this.$store.state.addSectionInput;
+                return this.$store.getters.getterAddSectionInput;
             }
         }
     },
     methods: {
-        ...mapActions(['getSections', 'changeSectionId', 'addSection', 'inputSection', 'setUserIdAct']),
-        sectionDelete(section_id) {
-            console.log("Вот секции ", this.sections);
-            this.sections = this.sections.filter(elem => elem.id !== section_id);
-            axios.delete(`api/section/${section_id}`).then(response => {
-                console.log(response)
-            });
-        },
+        ...mapActions(['getSections', 'changeSectionId', 'addSection', 'inputSection', 'sectionDelete']),
         setSelectSection(section_id) {
             if (section_id === undefined) {
                 this.$refs.TaskComponent.getTasks(null);//TODO IMPROVE
@@ -67,62 +59,6 @@ export default {
         console.log("Created");
         await this.getSections();
     }
-    /*
-    async mounted() {
-        console.log('Section component created');
-        let res = await this.getUserId();
-        this.$store.dispatch('getSections', res);
-        //this.$refs.TaskComponent.newTask.user_id = res;
-    }
-    /*
-    methods: {
-        async getUserId() {
-            await axios.get('/api/user/id').then(r => {
-                console.log(r);
-                this.newSection.user_id = r.data;
-                console.log(this.user_id);
-            });
-        },
-        getSections() {
-            axios.get(`api/section/${this.newSection.user_id}`).then(response => {
-                console.log('user id', response);
-                this.sections = response.data;
-            })
-        },
-        addSection() {
-            axios.post('api/section/create', this.newSection).then(response => {
-                console.log(response)
-                this.sections.push({
-                    id: response.data.id,
-                    section_name: response.data.section_name
-                });
-                console.log(this.sections);
-            });
-            this.newSection = {section_name: null};
-        },
-        setSelectSection(section_id) {
-            if (section_id === undefined) {
-                this.$refs.TaskComponent.getTasks(null);
-                this.section_id = null;
-                return;
-            }
-            this.$refs.TaskComponent.getTasks(section_id);
-            this.section_id = section_id;
-            console.log(`SELECT SECTION ${section_id}`);
-        },
-        inputSection() {
-            console.log(this.addSectionInput)
-            this.addSectionInput = !this.addSectionInput;
-        },
-        sectionDelete(section_id) {
-            console.log("Вот секции ", this.sections);
-            this.sections = this.sections.filter(elem => elem.id !== section_id);
-            axios.delete(`api/section/${section_id}`).then(response => {
-                console.log(response)
-            });
-        }
-
-    },*/
 
 
 }
