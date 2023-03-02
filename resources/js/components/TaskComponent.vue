@@ -45,9 +45,8 @@ export default {
         ...mapActions(['getTasks','changeTaskStatus','addInputTask','deleteTask','addTask']),
 
     },
-
-    async mounted() {
-        this.getTasks();
+    mounted() {
+        this.getTasks(this.$store.getters.getterSectionId);
     }
 }
 </script>
