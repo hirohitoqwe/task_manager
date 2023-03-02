@@ -48,11 +48,12 @@ export default {
         setSelectSection(section_id) {
             if (section_id === undefined) {
                 this.$refs.TaskComponent.getTasks(null);//TODO IMPROVE
-                context.commit('setSectionId', null);
+                //context.commit('setSectionId', null);
+            } else {
+                this.$refs.TaskComponent.getTasks(section_id);
+                //context.commit('setSectionId', section_id);
+                console.log(`SELECT SECTION ${section_id}`);
             }
-            this.$refs.TaskComponent.getTasks(section_id);
-            //context.commit('setSectionId', section_id);
-            console.log(`SELECT SECTION ${section_id}`);
         },
     },
     async created() {

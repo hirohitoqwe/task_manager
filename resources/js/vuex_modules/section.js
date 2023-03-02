@@ -33,7 +33,17 @@ export default {
         },
         sectionDelete(context, section_id) {
             context.commit('removeSection', section_id);
-        }
+        },
+        setSelectSection(context, section_id) {//TODO IMPROVE
+            if (section_id === undefined) {
+                this.$refs.TaskComponent.getTasks(null);
+                context.commit('setSectionId', null);
+            } else {
+                this.$refs.TaskComponent.getTasks(section_id);
+                context.commit('setSectionId', section_id);
+                console.log(`SELECT SECTION ${section_id}`);
+            }
+        },
 
     },
     mutations: {

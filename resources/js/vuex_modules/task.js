@@ -8,12 +8,16 @@ export default {
                     console.log(response)
                 });
             } else {
-                await axios.get(`api/nullTask/${this.newTask.user_id}`).then(response => {
-                    console.log('null task ', response);
-                    context.commit('updateTasks', response.data);
+                await axios.get('/api/user/id').then(r => {
+                    context.commit('changeUserId', r.data);
+                    axios.get(`api/nullTask/${r.data}`).then(response => {
+                        console.log('null task ', response);
+                        context.commit('updateTasks', response.data);
+                    });
                 });
+
             }
-            context.commit('changeNewTaskSectionId', section_id);
+            //context.commit('changeNewTaskSectionId', section_id);
         },
         async deleteTask(context, task_id) {
             context.commit('deleteTask', task_id);
@@ -21,20 +25,25 @@ export default {
                 console.log(response)
             });
         },
-        async addTask(context) {
+        async addTask({commit, state}) {
             console.log('Add task ?? ');
-            await axios.post('api/task', this.newTask).then(response => {
-                console.log('TASKA TASKS ', response);
-                context.commit('addTask', {
+            await axios.post('api/task', state.newTask).then(response => {
+                commit('addTask', {
                     id: response.data.id,
                     task_name: response.data.task_name,
                     task_status: response.data.task_status,
                     user_id: response.data.user_id
                 })
+                console.log('TASKA TASKS ', response);
                 console.log('tasks ', this.tasks);
-                this.newTask.task_name = null;
+                state.newTask.task_name = null;
+            }).catch(er => {
+                commit('deleteLastTask');
             });
 
+        },
+        async addInputTask(context) {
+            context.commit('changeInputTask')
         },
         async changeTaskStatus(context, task_id) {
             await axios.patch(`api/task/${task_id}`).then(response => {
@@ -74,6 +83,12 @@ export default {
         },
         changeUserId(state, user_id) {
             state.newTask.user_id = user_id;
+        },
+        deleteLastTask(state) {
+            state.tasks.pop();
+        },
+        changeInputTask(state) {
+            state.inputTask = !state.inputTask;
         }
 
     },
@@ -88,13 +103,13 @@ export default {
         }
     },
     getters: {
-        TaskGetter(state, section_id) {
+        getterTask(state) {
             return state.tasks;
         },
-        inputTaskGetter(state) {
+        getterInputTask(state) {
             return state.inputTask;
         },
-        newTaskGetter(state) {
+        getterNewTask(state) {
             return state.newTask;
         },
 
