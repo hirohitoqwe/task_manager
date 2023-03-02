@@ -32,16 +32,6 @@ export default {
         sectionDelete(context, section_id) {
             context.commit('removeSection', section_id);
         },
-        setSelectSection(context, section_id) {//TODO IMPROVE
-            if (section_id === undefined) {
-                context.commit('setSectionId', null);
-                task.actions.getTasks.getTasks(null);
-            } else {
-                context.commit('setSectionId', section_id);
-                task.actions.getTasks(section_id);
-                console.log(`SELECT SECTION ${section_id}`);
-            }
-        },
         async getTasks(context, section_id) {
             console.log("get tasks ASYNC", section_id);
             if (section_id != null) {
@@ -141,13 +131,16 @@ export default {
             state.tasks.push(newTask)
         },
         changeTaskStatus(state, task_id) {
-            state.tasks = state.tasks.forEach((element, index) => {
+            console.log("start foreach");
+            state.tasks.forEach((element, index) => {
                 if (element.id === task_id) {
                     console.log(element);
                     element.task_status = !element.task_status;
                     console.log(element.task_status);
                 }
             });
+            console.log(state.tasks)
+            console.log("section id ",state.section_id)
         },
         changeUserId(state, user_id) {
             state.newTask.user_id = user_id;

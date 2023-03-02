@@ -44,7 +44,17 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getSections', 'changeSectionId', 'addSection', 'inputSection', 'sectionDelete','setSelectSection']),
+        ...mapActions(['getSections','getTasks', 'changeSectionId', 'addSection', 'inputSection', 'sectionDelete']),
+        setSelectSection(section_id) {//TODO IMPROVE
+            if (section_id === undefined) {
+                this.$store.commit('setSectionId', null);
+                this.getTasks(null);
+            } else {
+                this.$store.commit('setSectionId', section_id);
+                this.getTasks(section_id);
+                console.log(`SELECT SECTION ${section_id}`);
+            }
+        }
     },
     async created() {
         console.log("Created");
