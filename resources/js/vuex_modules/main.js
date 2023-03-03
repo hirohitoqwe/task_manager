@@ -16,24 +16,19 @@ export default {
             } else {
                 commit('setSectionId', section_id);
                 dispatch('getTasks', section_id);
-                console.log(`SELECT SECTION ${section_id}`);
             }
         },
         addSection({commit, state}) {
-            console.log("NEW SECTION", this.newSection)
             axios.post('api/section/create', state.newSection).then(response => {
-                console.log(response)
                 commit('addNewSection',
                     {
                         id: response.data.id,
                         section_name: response.data.section_name
                     })
-                console.log(this.sections);
             });
             commit('nullOfNullSection');
         },
         inputSection(context) {
-            console.log(this.addSectionInput)
             context.commit('changeSectionInputStatus');
         },
         changeSectionId(context, section_id) {
@@ -43,7 +38,6 @@ export default {
             context.commit('removeSection', section_id);
         },
         async getTasks(context, section_id) {
-            console.log("get tasks ASYNC", section_id);
             if (section_id != null) {
                 await axios.post(`api/section/getTask/${section_id}`).then(response => {
                     context.commit('updateTasks', response.data);
@@ -51,7 +45,6 @@ export default {
                     console.log(response)
                 });
             } else {
-                console.log("HEY WE CALL ", section_id)
                 await axios.get('/api/user/id').then(r => {
                     context.commit('changeUserId', r.data);
                     axios.get(`api/nullTask/${r.data}`).then(response => {
@@ -70,7 +63,6 @@ export default {
             });
         },
         async addTask({commit, state}) {
-            console.log('Add task ?? ');
             await axios.post('api/task', state.newTask).then(response => {
                 commit('addTask', {
                     id: response.data.id,
@@ -78,8 +70,6 @@ export default {
                     task_status: response.data.task_status,
                     user_id: response.data.user_id
                 })
-                console.log('TASKA TASKS ', response);
-                console.log('tasks ', this.tasks);
                 state.newTask.task_name = null;
             });
         },
@@ -96,7 +86,6 @@ export default {
             await axios.get('/api/user/id').then(r => {
                 console.log(r);
                 context.commit('changeUserId', r.data);
-                console.log(this.user_id);
             });
         },
 
@@ -104,7 +93,6 @@ export default {
     mutations: {
         setSections(state, sections) {
             state.sections = sections;
-            console.log("YOOOO MUTATIONS ", sections)
         },
         setSectionId(state, section_id) {
             state.section_id = section_id;
@@ -114,7 +102,6 @@ export default {
         },
         changeSectionInputStatus(state) {
             state.addSectionInput = !state.addSectionInput;
-            console.log("Mutation ", state.addSectionInput)
         },
         removeSection(state, section_id) {
             state.sections = state.sections.filter(elem => elem.id !== section_id);
@@ -141,16 +128,11 @@ export default {
             state.tasks.push(newTask)
         },
         changeTaskStatus(state, task_id) {
-            console.log("start foreach");
             state.tasks.forEach((element, index) => {
                 if (element.id === task_id) {
-                    console.log(element);
                     element.task_status = !element.task_status;
-                    console.log(element.task_status);
                 }
             });
-            console.log(state.tasks)
-            console.log("section id ", state.section_id)
         },
         changeUserId(state, user_id) {
             state.newTask.user_id = user_id;
@@ -178,11 +160,9 @@ export default {
     },
     getters: {
         getterSections(state) {
-            console.log("state sections ", state.sections)
             return state.sections;
         },
         getterSectionId(state) {
-            console.log("getterSectionId")
             return state.section_id;
         },
         getterAddSectionInput(state) {

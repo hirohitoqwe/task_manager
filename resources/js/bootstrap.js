@@ -1,3 +1,5 @@
+//import VueRouter from 'vue-router'
+
 const router = require("./router");
 window._ = require('lodash');
 
@@ -19,19 +21,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
-    console.log('EROR IN BOOTSTRAP ');
     if (error.response.status === 401 || error.response.status === 419) {
         const token = localStorage.getItem('x_xsrf_token');
-
         if (token) {
             localStorage.removeItem('x_xsrf_token');
         }
-
         router.push({name: 'user.login'}).then(res => {
             console.log("router res", res);
+        }).catch(err => {
+            console.log("vue router push error", err);
         });
     }
-})
+});
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

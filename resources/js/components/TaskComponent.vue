@@ -46,6 +46,7 @@ export default {
 
     },
     mounted() {
+        console.log("Task component is started")
         this.getTasks(this.$store.getters.getterSectionId);
     }
 }
