@@ -27,7 +27,9 @@ window.axios.interceptors.response.use(function (response) {
             localStorage.removeItem('x_xsrf_token');
         }
 
-        router.push({name: 'user.login'});
+        router.push({name: 'user.login'}).then(res => {
+            console.log("router res", res);
+        });
     }
 })
 

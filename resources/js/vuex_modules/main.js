@@ -9,6 +9,16 @@ export default {
             });
 
         },
+        setSelectSection({dispatch, commit}, section_id) {//TODO IMPROVE
+            if (section_id === undefined) {
+                commit('setSectionId', null);
+                dispatch('getTasks', null);
+            } else {
+                commit('setSectionId', section_id);
+                dispatch('getTasks', section_id);
+                console.log(`SELECT SECTION ${section_id}`);
+            }
+        },
         addSection({commit, state}) {
             console.log("NEW SECTION", this.newSection)
             axios.post('api/section/create', state.newSection).then(response => {
@@ -140,7 +150,7 @@ export default {
                 }
             });
             console.log(state.tasks)
-            console.log("section id ",state.section_id)
+            console.log("section id ", state.section_id)
         },
         changeUserId(state, user_id) {
             state.newTask.user_id = user_id;
