@@ -1,4 +1,4 @@
-//import VueRouter from 'vue-router'
+import VueRouter from 'vue-router'
 
 const router = require("./router");
 window._ = require('lodash');
@@ -17,6 +17,7 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.withCredentials = true;
 
 window.axios.interceptors.response.use(function (response) {
     return response;
@@ -26,11 +27,7 @@ window.axios.interceptors.response.use(function (response) {
         if (token) {
             localStorage.removeItem('x_xsrf_token');
         }
-        router.push({name: 'user.login'}).then(res => {
-            console.log("router res", res);
-        }).catch(err => {
-            console.log("vue router push error", err);
-        });
+        window.location.href = '/user/login';
     }
 });
 
