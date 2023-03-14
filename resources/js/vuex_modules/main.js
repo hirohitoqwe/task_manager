@@ -9,7 +9,7 @@ export default {
             });
 
         },
-        setSelectSection({dispatch, commit}, section_id) {//TODO IMPROVE
+        setSelectSection({dispatch, commit}, section_id) {
             if (section_id === undefined) {
                 commit('setSectionId', null);
                 dispatch('getTasks', null);
