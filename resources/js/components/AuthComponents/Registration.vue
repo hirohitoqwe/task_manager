@@ -22,16 +22,18 @@ export default {
 
     methods: {
         registr() {
-            axios.get('/sanctum/csrf-cookie').then(response => {
+            axios.get('/sanctum/csrf-cookie').then(rps => {
                 axios.post('/register', {
                     name: this.name,
                     email: this.email,
                     password: this.password,
                     password_confirmation: this.password_confirmation
                 }).then(response => {
-                    localStorage.setItem('x_xsrf_token', response.config.headers['X-XSRF-TOKEN']);
+                    localStorage.setItem('x_xsrf_token', rps.config.headers['X-XSRF-TOKEN']);
                     this.$parent.token = localStorage.getItem('x_xsrf_token');
                     this.$router.push({name: 'profile.index'});
+                }).catch(err => {
+                    console.log(err);
                 });
             });
         }

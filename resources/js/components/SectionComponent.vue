@@ -46,7 +46,7 @@ export default {
     methods: {
         ...mapActions(['getSections','getTasks', 'changeSectionId', 'addSection', 'inputSection', 'sectionDelete','setSelectSection']),
     },
-    async mounted() {
+    async created() {
         console.log("Section component is started");
         await this.getSections();
     }

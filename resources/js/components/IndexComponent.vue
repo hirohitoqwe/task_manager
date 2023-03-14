@@ -33,10 +33,9 @@ export default {
     mounted() {
         this.getToken();
         if (this.token) {
-            console.log(this.token);
+            console.log("ebat ebat ",this.token);
             this.$router.push({name: 'profile.index'});
         }
-        console.log("Index component is started");
     }
 }
 </script>
