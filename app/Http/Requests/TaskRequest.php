@@ -26,7 +26,7 @@ class TaskRequest extends FormRequest
         return [
             'task_name' => 'required|string',
             'section_id' => 'nullable|numeric',
-            'user_id' => 'required|numeric'//TODO test
+            'user_id' => 'required|numeric'
         ];
     }
 }
