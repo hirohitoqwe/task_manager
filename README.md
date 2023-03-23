@@ -11,5 +11,5 @@
 For everyday tracking cases and plans
 
 #### Gratitude to
-* Danil Wirtenbergers
+* Danil Wirtenberger
 * Andrey Khodyrev
