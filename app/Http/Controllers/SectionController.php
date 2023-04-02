@@ -6,6 +6,7 @@ use App\Models\Section;
 use App\Models\Task;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isEmpty;
 
 class SectionController extends Controller
 {
@@ -18,6 +19,9 @@ class SectionController extends Controller
     public function getSectionByUser(int $userId): JsonResponse // maybe replace int to user
     {
         $sections = Section::where('user_id', $userId)->get();
+        if ($sections->isEmpty()){
+            return response()->json(null, 404);
+        }
         return response()->json($sections, 200);
     }
 
