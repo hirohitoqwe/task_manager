@@ -11,7 +11,7 @@ use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 use function PHPUnit\Framework\assertEquals;
 
-class sectionTest extends TestCase
+class SectionTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -48,7 +48,7 @@ class sectionTest extends TestCase
         $response->assertStatus(404);
     }
 
-    public function test_section_by_user()
+    public function test_section_by_user_2()//section isset
     {
         $user = User::factory()->create();
         Sanctum::actingAs(
