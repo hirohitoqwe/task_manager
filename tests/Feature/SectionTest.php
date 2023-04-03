@@ -13,7 +13,7 @@ use function PHPUnit\Framework\assertEquals;
 
 class SectionTest extends TestCase
 {
-    /**
+    /**git
      * A basic feature test example.
      *
      * @return void
@@ -50,16 +50,15 @@ class SectionTest extends TestCase
 
     public function test_section_by_user_2()//section isset
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create()->first();
         Sanctum::actingAs(
             $user,
             ['*']
         );
-        $section = new Section();
-        $section->section_name = 'test';
-        $section->user_id = $user->id;
-        $section->save();
+        $section = Section::factory()->create(['user_id' => $user->id])->first();
         $response = $this->get("/api/section/{$user->id}");
+        $response->assertStatus(200);
+        $response = $this->get("/api/section/getTask/{$section->id}");
         $response->assertStatus(200);
     }
 
