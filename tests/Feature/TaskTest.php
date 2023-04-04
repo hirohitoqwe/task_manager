@@ -29,8 +29,11 @@ class TaskTest extends TestCase
             $user,
             ['*']
         );
-        $response = $this->post('/api/task', ['task_name' => 'test_task', 'user_id' => $user->id]);
-        $response->assertStatus(201);
+        $createdTask = $this->post('/api/task', ['task_name' => 'test_task', 'user_id' => $user->id]);
+        $createdTask->assertStatus(201);
+        //Delete task Test :)
+        $response = $this->delete("/api/task/{$createdTask->original->id}");
+        $response->assertStatus(202);
     }
 
 }
