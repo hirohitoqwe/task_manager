@@ -22,18 +22,26 @@ class TaskTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_create_task()
+    public function test_crud_task()
     {
         $user = User::factory()->create();
         Sanctum::actingAs(
             $user,
             ['*']
         );
+        //Create task Test :)
         $createdTask = $this->post('/api/task', ['task_name' => 'test_task', 'user_id' => $user->id]);
         $createdTask->assertStatus(201);
+        //Update task status Test :)
+        $updateTask = $this->patch("/api/task/{$createdTask->original->id}");
+        $updateTask->assertStatus(200);
+        $original_status = $createdTask->original->task_status;
+        $this->assertTrue($original_status);
+        $changedStatus = $updateTask->original->task_status;
+        $this->assertFalse($changedStatus);
         //Delete task Test :)
-        $response = $this->delete("/api/task/{$createdTask->original->id}");
-        $response->assertStatus(202);
+        $deleteTask = $this->delete("/api/task/{$createdTask->original->id}");
+        $deleteTask->assertStatus(202);
     }
 
 }
