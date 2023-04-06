@@ -55,7 +55,7 @@ class SectionTest extends TestCase
             $user,
             ['*']
         );
-        $section = Section::factory()->create(['user_id' => $user->id])->first();
+        $section = Section::factory()->create(['user_id' => $user->id]);
         $response = $this->get("/api/section/{$user->id}");
         $response->assertStatus(200);
         $response = $this->get("/api/section/getTask/{$section->id}");

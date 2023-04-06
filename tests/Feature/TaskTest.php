@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -30,18 +31,18 @@ class TaskTest extends TestCase
             ['*']
         );
         //Create task Test :)
-        $createdTask = $this->post('/api/task', ['task_name' => 'test_task', 'user_id' => $user->id]);
+        $task = Task::factory()->create();
+        $createdTask = $this->post('/api/task', ['task_name' => $task->task_name, 'user_id' => $task->user_id, 'section_id' => $task->section_id, 'task_status' => $task->task_status]);
         $createdTask->assertStatus(201);
         //Update task status Test :)
-        $updateTask = $this->patch("/api/task/{$createdTask->original->id}");
+        $updateTask = $this->patch("/api/task/{$task->id}");
         $updateTask->assertStatus(200);
-        $original_status = $createdTask->original->task_status;
+        $original_status = $task->task_status;
         $this->assertTrue($original_status);
         $changedStatus = $updateTask->original->task_status;
         $this->assertFalse($changedStatus);
         //Delete task Test :)
-        $deleteTask = $this->delete("/api/task/{$createdTask->original->id}");
+        $deleteTask = $this->delete("/api/task/{$task->id}");
         $deleteTask->assertStatus(202);
     }
-
 }
