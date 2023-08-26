@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{userId}', [SectionController::class, 'getSectionByUser']);
         Route::post('/create', [SectionController::class, 'createSection']);
         Route::delete('/{id}', [SectionController::class, 'deleteSection']);
-        Route::post('/getTask/{id}', [TaskController::class, 'getSectionTask']);
+        Route::get('/getTask/{id}', [TaskController::class, 'getSectionTask']);
     });
     Route::get('/nullTask/{userId}', [TaskController::class, 'getTasks']);
     Route::get('/tasks/{userId}', [TaskController::class, 'getTasksByUser']);

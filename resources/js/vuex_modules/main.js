@@ -39,7 +39,7 @@ export default {
         },
         async getTasks(context, section_id) {
             if (section_id != null) {
-                await axios.post(`api/section/getTask/${section_id}`).then(response => {
+                await axios.get(`api/section/getTask/${section_id}`).then(response => {
                     context.commit('updateTasks', response.data);
                 }).catch(response => {
                     console.log(response)
